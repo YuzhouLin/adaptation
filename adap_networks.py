@@ -9,7 +9,8 @@ import torch.optim as optim
 import pandas as pd
 from Models.rawConvNet import Model
 from Models.model_training import trian_TL, train_ADANN, train_FT
-import Models.utils as utils
+#import Models.utils as utils
+import utils
 
 parser = argparse.ArgumentParser()
 method = parser.add_mutually_exclusive_group()
@@ -28,7 +29,7 @@ DEVICE = utils.get_device()
 
 
 def pretrain(params, trainloaders):
-    since = time.time()    
+    since = time.time()
     model_name = f"{params['weight_path']}{params['ex_n']}_pretrained.pt"
     #  Load the model
     model = Model(number_of_class=CLASS_N, number_of_blocks=BLOCK_N, number_of_channels=16, dropout_rate=.35, filter_size=FILTER_SIZE)
@@ -183,6 +184,7 @@ if __name__ == "__main__":
 
 
     if data_prepare_required:
+    #  Get the data prepared
         utils.data_prepare(**prepare_params)
         utils.data_process(**process_params)
 
